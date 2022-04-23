@@ -1,0 +1,116 @@
+﻿<Window x:Class="JwtGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="JWT Generator" Height="450" Width="800">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="OpenCommandBinding_OnExecuted"/>
+        <CommandBinding Command="SaveAs" Executed="SaveAsCommandBinding_OnExecuted"/>
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Key="O" Modifiers="Control" Command="Open"/>
+        <KeyBinding Key="S" Modifiers="Control" Command="SaveAs"/>
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="Configuration">
+                <MenuItem Header="Open" Command="Open" InputGestureText="Ctrl+O"></MenuItem>
+                <MenuItem Header="Save" Command="SaveAs" InputGestureText="Ctrl+S"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="Audience" HorizontalContentAlignment="Center"></Label>
+                <TextBox x:Name="TbAudience" Grid.Column="1" HorizontalContentAlignment="Left" Margin="5 5 5 5"></TextBox>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="Issuer" HorizontalContentAlignment="Center"></Label>
+                <TextBox x:Name="TbIssuer" Grid.Column="1" HorizontalContentAlignment="Left" Margin="5 5 5 5"></TextBox>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="Key" HorizontalContentAlignment="Center"></Label>
+                <TextBox x:Name="TbKey" Grid.Column="1" HorizontalContentAlignment="Left" Margin="5 5 5 5"></TextBox>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="Lifetime" HorizontalContentAlignment="Center"></Label>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton x:Name="Rb1h" GroupName="Lifetime" Content="1 hour" IsChecked="True" Margin="5 5 5 5" Checked="SetLifetime"/>
+                    <RadioButton x:Name="Rb24h" GroupName="Lifetime" Content="24 hours" Margin="5 5 5 5" Checked="SetLifetime"/>
+                    <RadioButton x:Name="Rb1m" GroupName="Lifetime" Content="1 month" Margin="5 5 5 5" Checked="SetLifetime"/>
+                    <RadioButton x:Name="Rb1y" GroupName="Lifetime" Content="1 year" Margin="5 5 5 5" Checked="SetLifetime"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="Role" HorizontalContentAlignment="Center"></Label>
+                <TextBox x:Name="TbRole" Grid.Column="1" HorizontalContentAlignment="Left" Margin="5 5 5 5"></TextBox>
+            </Grid>
+
+            <xctk:CollectionControl x:Name="CcClaims" Grid.Row="5" Margin="5 5 5 5"></xctk:CollectionControl>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BtnGenerate" Content="Generate" Grid.Column="0" Margin="5 5 5 5" Click="BtnGenerate_Click"></Button>
+            <Button x:Name="BtnCopy" Content="Copy" Grid.Column="1" Margin="5 5 5 5" Click="BtnCopy_Click"></Button>
+            <Button x:Name="BtnClear" Content="Clear" Grid.Column="2" Margin="5 5 5 5" Click="BtnClear_Click"></Button>
+            <TextBox x:Name="TbToken" Grid.Column="3"  Margin="5 5 5 5"></TextBox>
+        </Grid>
+    </Grid>
+</Window>
