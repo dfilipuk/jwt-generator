@@ -1,1 +1,3 @@
-# jwt-generator
+# JWT Generator
+
+![](./jwt-generator.png)
